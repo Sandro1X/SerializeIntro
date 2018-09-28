@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class SaveTester {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Schueler s1 = new Schueler("Hans", LocalDate.of(2000, 3, 1));
         Schueler s2 = new Schueler("Grete", LocalDate.of(1999, 10, 10));
         
@@ -14,9 +14,17 @@ public class SaveTester {
         bl.add(s2);
         
         try{
-            bl.save(new File("./klasse.csv"));
+            bl.save(new File("src//klasse.csv"));
         }catch (Exception e){
             e.printStackTrace();
         }
+        LoadTester lt = new LoadTester();
+        
+        try{
+            lt.test();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
     }
 }
