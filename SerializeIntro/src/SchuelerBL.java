@@ -1,11 +1,9 @@
 
-import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -33,23 +31,15 @@ public class SchuelerBL {
 //        bw.close();
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
         
-        for (Schueler s : schueler) {
-            oos.writeObject(s);
-        }
+        oos.writeObject(schueler);
         
         oos.flush();
         oos.close();
     }
     
     public void load(File f)throws Exception{
-        BufferedReader br = new BufferedReader(new FileReader(f));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
         
-        String line;
-        
-        while((line = br.readLine()) != null){
-            String[] attr = line.split(";");
-            this.add(new Schueler(attr[0], LocalDate.parse(attr[1], DateTimeFormatter.ISO_DATE)));
-        }
-        br.close();
+        schueler = (ArrayList<Schueler>) ois.readObject();
     }
 }
