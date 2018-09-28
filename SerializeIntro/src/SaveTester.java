@@ -14,7 +14,7 @@ public class SaveTester {
         bl.add(s2);
         
         try{
-            bl.save(new File("src//klasse.csv"));
+            bl.save(new File("src//klasse.bin"));
         }catch (Exception e){
             e.printStackTrace();
         }
